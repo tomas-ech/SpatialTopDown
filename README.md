@@ -12,7 +12,7 @@ This class is used by the player to know if his/her character is still alive or 
 There is no custom methos, just an OnTriggerEnter2D, when the "EnemyBullet" hits player
 he/she dies
 
-3. PlayerMovement
+2. PlayerMovement
    
 Its function is move the player when WASD or space bar input is used
 
@@ -39,7 +39,7 @@ Its function is move the player when WASD or space bar input is used
    
    Method to control the player speed using magnitude and normalized vectors
 
-5. PlayerAbilities
+3. PlayerAbilities
    
 Class who give the player the possibility to use abilities
 
@@ -53,7 +53,7 @@ Class who give the player the possibility to use abilities
 Class to move a Gameobject who will work as mousepointer, it use the camera and the method
 Screentoworldpoint to know the position of the mouse and place the pointer there
 
-6. VidPlayer
+5. VidPlayer
    
 Class to place mp4 video in the videoplayer object to use it as moving background to the game
 
