@@ -88,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        rb.MovePosition(rb.position + inputMovement * moveSpeed * Time.fixedDeltaTime);
+        rb.velocity = (transform.up * verticalInput + Vector3.right * horizontalInput) * moveSpeed;
+        //rb.MovePosition(rb.position + inputMovement * moveSpeed * Time.fixedDeltaTime);
 
         Vector2 dir = mousePos - rb.position;
         //angulo = atan2(y, x)
