@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    public Transform firePoint;
-    public GameObject bulletPrefab;
-
-    public float bulletSpeed = 10f;
+    [Header("Bullets Info")]
+    [SerializeField] Transform firePoint;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletSpeed = 10f;
 
     void Start()
     {
@@ -26,4 +27,5 @@ public class PlayerAbilities : MonoBehaviour
         }   
 
     }
+
 }

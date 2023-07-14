@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Coins : MonoBehaviour
 {
+    private void Start()
+    {
+        int randomNumber = Random.Range(3, 10);
+        Destroy(gameObject, randomNumber);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

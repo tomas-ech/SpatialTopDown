@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Header("Coins Info")]
     public GameObject coinPrefab;
-    public int xLimit;
-    public int yLimit;
+    public int xCoinLimit;
+    public int yCoinLimit;
     public int spawnCoinRate;
+
+    [Header("Enemy Info")]
+    public GameObject[] enemyArray;
 
     void Start()
     {
@@ -21,8 +25,8 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnCoins()
     {
-        int randomX = Random.Range(-xLimit, xLimit);
-        int randomY = Random.Range(-yLimit, yLimit);
+        int randomX = Random.Range(-xCoinLimit, xCoinLimit);
+        int randomY = Random.Range(-yCoinLimit, yCoinLimit);
 
         Instantiate(coinPrefab, new Vector3(randomX, randomY, 0f), Quaternion.identity);
     }

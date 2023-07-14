@@ -6,18 +6,27 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Vector2 inputMovement;
     private Camera cam;
+
+    [Header("Movement Info")]
+    private Vector2 inputMovement;
     private Vector2 mousePos;
+    private float horizontalInput;
+    private float verticalInput;
+    [SerializeField] float moveSpeed;
 
-
-
+    [SerializeField] int xLimit;
+    [SerializeField] int yLimit;
     public Vector2 MovementDirection => inputMovement;
     public bool isMoving => inputMovement.magnitude > 0f;
 
-
-    [SerializeField] float moveSpeed;
+    [Header("Dash Info")]
     [SerializeField] float dashSpeed;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashCooldown;
+    private bool isDashing;
+    private bool canDash = true;
+
 
     private void Start()
     {
@@ -27,27 +36,52 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
+        Boundaries();
         PlayerInput();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
-            Dash();
+            StartCoroutine(Dash());
         }
     }
 
 
     private void FixedUpdate()
     {
+        if (isDashing)
+        {
+            return;
+        }
+
         Movement();
     }
-    private void Dash()
+    IEnumerator Dash()
     {
-        rb.velocity = Vector2.up * dashSpeed;
+        canDash = false;
+        isDashing = true;
+
+        rb.velocity = transform.up * dashSpeed;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        
+        canDash = true;
     }
 
     private void PlayerInput()
     {
-        inputMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+
+        inputMovement = new Vector2(horizontalInput, verticalInput);
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
@@ -60,5 +94,25 @@ public class PlayerMovement : MonoBehaviour
         //angulo = atan2(y, x)
         float lookAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = lookAngle;
+    }
+
+    private void Boundaries()
+    {
+        if (transform.position.x >= xLimit)
+        {
+            transform.position = new Vector3(xLimit, transform.position.y);
+        }
+        if (transform.position.x <= -xLimit)
+        {
+            transform.position = new Vector3(-xLimit, transform.position.y);
+        }
+        if (transform.position.y >= yLimit)
+        {
+            transform.position = new Vector3(transform.position.x, yLimit);
+        }
+        if (transform.position.y <= -yLimit)
+        {
+            transform.position = new Vector3(transform.position.x, -yLimit);
+        }
     }
 }

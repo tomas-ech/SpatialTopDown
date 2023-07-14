@@ -6,8 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {get; private set;}
 
+    //public 
+
     [Header("Score Info")]
     public int coins;
+    public int enemies;
     public int score;
 
 
@@ -31,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        score = (coins * 5) + (enemies * 8);
     }
 
 }
