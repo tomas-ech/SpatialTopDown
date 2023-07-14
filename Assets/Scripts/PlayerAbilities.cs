@@ -9,6 +9,8 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] Transform firePoint;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletSpeed = 10f;
+    private float timer;
+    private float shootTimer = 0.3f;
 
     void Start()
     {
@@ -17,15 +19,26 @@ public class PlayerAbilities : MonoBehaviour
 
     void Update()
     {
-         if (Input.GetButtonDown("Fire1"))
+        if (!GameManager.Instance.canPlay) {return;}
+        
+        PlayerShoot1();
+    }
+
+    private void PlayerShoot1()
+    {
+        timer += Time.deltaTime;
+
+        if (timer > shootTimer && Input.GetButtonDown("Fire1"))
         {
+            timer = 0;
+
+            AudioManager.Instance.PlaySFX(0);
+
             GameObject attack = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             Rigidbody2D rbAttack = attack.GetComponent<Rigidbody2D>();
 
             rbAttack.AddForce(firePoint.up * bulletSpeed, ForceMode2D.Impulse);
-        }   
-
+        }
     }
-
 }

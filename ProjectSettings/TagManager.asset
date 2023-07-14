@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Coin
   - Enemy
+  - EnemyPaths
+  - PlayerBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

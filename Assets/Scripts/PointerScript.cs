@@ -6,11 +6,7 @@ public class PointerScript : MonoBehaviour
 {
     private Camera cam;
 
-    private void Awake()
-    {
-        Cursor.visible = false;
-    }
-
+    
     void Start()
     {
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -18,6 +14,8 @@ public class PointerScript : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.canPlay || GameManager.Instance.isDead) {return;}
+        
         transform.position = new Vector3(cam.ScreenToWorldPoint(Input.mousePosition).x, cam.ScreenToWorldPoint(Input.mousePosition).y, 0f);
     }
 }

@@ -37,10 +37,10 @@ public class PlayerMovement : MonoBehaviour
     
     private void Update()
     {
-        if (isDashing)
-        {
-            return;
-        }
+
+        if (!GameManager.Instance.canPlay) {return;}
+
+        if (isDashing) {return;}
 
         Boundaries();
         PlayerInput();
@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             StartCoroutine(Dash());
+            AudioManager.Instance.PlaySFX(2);
         }
     }
 
@@ -90,7 +91,6 @@ public class PlayerMovement : MonoBehaviour
     private void Movement()
     {
         rb.velocity = (transform.up * verticalInput + Vector3.right * horizontalInput) * moveSpeed;
-        //rb.MovePosition(rb.position + inputMovement * moveSpeed * Time.fixedDeltaTime);
 
         Vector2 dir = mousePos - rb.position;
         //angulo = atan2(y, x)
@@ -117,4 +117,5 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -yLimit);
         }
     }
+    
 }

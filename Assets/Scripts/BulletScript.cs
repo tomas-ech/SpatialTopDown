@@ -42,7 +42,7 @@ public class BulletScript : MonoBehaviour
 
             impactFx.SetActive(true);
             impactFx.transform.SetParent(null);
-            //AudioManager.Instance.PlaySFX(5);
+            AudioManager.Instance.PlaySFX(5);
             Destroy(impactFx, 0.5f);
             Destroy(gameObject);
         }

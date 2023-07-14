@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager Instance;
 
     [SerializeField] private AudioSource[] sfx;
     [SerializeField] private AudioSource[] bgm;
@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Update()

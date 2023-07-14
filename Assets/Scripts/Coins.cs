@@ -14,14 +14,11 @@ public class Coins : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //AudioManager.instance.PlaySFX(0);
+            AudioManager.Instance.PlaySFX(4);
             GameManager.Instance.coins++;
             Destroy(gameObject);
         }
 
-        /*if (other.GetComponent<Enemy>() != null)
-        {
-            Destroy(gameObject);
-        }*/
+        
     }
 }
