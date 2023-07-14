@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
         {
             GameManager.Instance.isDead = true;
             this.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(3);
         }
     }
 }

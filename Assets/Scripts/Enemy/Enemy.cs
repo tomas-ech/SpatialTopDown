@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             GameManager.Instance.isDead = true;
+            AudioManager.Instance.PlaySFX(3);
         }
     }
 
