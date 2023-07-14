@@ -14,17 +14,18 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     [SerializeField] float moveSpeed;
-
     [SerializeField] int xLimit;
     [SerializeField] int yLimit;
+
     public Vector2 MovementDirection => inputMovement;
     public bool isMoving => inputMovement.magnitude > 0f;
+
 
     [Header("Dash Info")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
-    [SerializeField] float dashCooldown;
-    private bool isDashing;
+    public float dashCooldown;
+    [HideInInspector] public bool isDashing;
     private bool canDash = true;
 
 
